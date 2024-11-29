@@ -19,5 +19,5 @@ dependencies:
     - collections           # Installed by default, not always needed in pip
 about:
   home: "https://github.com/yourusername/pepa_paintchr"  # Optional: URL for project home
-  license: "MIT"                                         # License for your project
+  license: "Apache License 2.0"                          # License for your project
   summary: "Pipeline for genetic analysis using PePa PaintChr."
