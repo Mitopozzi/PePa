@@ -28,7 +28,7 @@ The output of all analyses is made suitable for ggplot2, and all plots are done 
 1. **Create a Conda Environment (Optional)**:
    To keep dependencies isolated, create a dedicated environment:
    ```bash
-   conda create -n pepa_env python=3.1
+   conda create -n pepa_env python=3.10
    conda activate pepa_env
    ```
 
