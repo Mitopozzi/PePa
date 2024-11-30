@@ -28,14 +28,14 @@ The output of all analyses is made suitable for ggplot2, and all plots are done 
 1. **Create a Conda Environment (Optional)**:
    To keep dependencies isolated, create a dedicated environment:
    ```bash
-   conda create -n pepa_env python=3.8 -y
+   conda create -n pepa_env python=3.1
    conda activate pepa_env
    ```
 
 2. **Install `PePa`**:
    Run the following command to install `PePa`:
    ```bash
-   conda install pepa
+   conda install mitopozzi::pepa
    ```
 
 3. **Verify Installation**:
