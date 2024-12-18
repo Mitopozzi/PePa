@@ -21,8 +21,8 @@ for (pkg in packages) {
 
 
 # Load required libraries
-library(dplyr, quietly = T)
 library(ggplot2, quietly = T)
+library(patchwork, quietly = T)
 
 # Read the data from the input file
 df <- read.csv(input_file, sep = "\t")  # Adjust sep if necessary
@@ -30,16 +30,18 @@ df <- read.csv(input_file, sep = "\t")  # Adjust sep if necessary
 # List to store plots
 plot_list <- list()
 
-# Calculate the total range for each chromosome and filter for the top X longest
-top_chromosomes <- df %>%
-  group_by(Chromosome) %>%
-  summarise(total_length = max(End) - min(Start)) %>%
-  arrange(desc(total_length)) %>%
-  slice_head(n = 7) %>%
-  pull(Chromosome)
+# Calculate the total length for each Chromosome
+total_lengths <- aggregate(cbind(total_length = End - Start) ~ Chromosome, data = df, 
+                           FUN = function(x) max(x) - min(x))
+
+# Sort by total length in descending order
+total_lengths <- total_lengths[order(-total_lengths$total_length), ]
+
+# Select the top 7 chromosomes
+top_chromosomes <- head(total_lengths$Chromosome, 7)
 
 # Filter the dataset to include only the top X chromosomes
-df <- df %>% filter(Chromosome %in% top_chromosomes)
+df <- df[df$Chromosome %in% top_chromosomes, ]
 
 
 # Loop through each unique filename

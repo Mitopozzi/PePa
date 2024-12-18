@@ -1,0 +1,4 @@
+CR01.vcf.gz
+CR02.vcf.gz
+CR03.vcf.gz
+CR04.vcf.gz

@@ -156,7 +156,7 @@ if [ -n "$input_file" ]; then
 	# Part 0: Prepare the data from genome painting
 	echo "Running Part 0: Generating a tabulate version of VCF files provided..."
 	# Call a Python script for processing using TARGET1 and TARGET2
-	python "${script_path}PePa_BC_VCFtoTable.py" -L "$input_file" -P1 "$TARGET1" -P2 "$TARGET2" -O "$OUTPUT000"
+	python "${script_path}/PePa_BC_VCFtoTable.py" -L "$input_file" -P1 "$TARGET1" -P2 "$TARGET2" -O "$OUTPUT000"
 	echo "Part 0: Complete"
 	echo ""
 
@@ -194,14 +194,14 @@ OUTPUT1=$(mktemp)
 FILT1="${output_file_base}_Transformed.csv"
 
 echo "Running Part 1: Transforming Tabulated VCF file into Comparison File"
-python "${script_path}PePa_BC_ComparisonTable.py" -i "$OUTPUT0" -o "$OUTPUT1" -p "$print_columns" -t "$target_columns" -c "$compare_columns" 
+python "${script_path}/PePa_BC_ComparisonTable.py" -i "$OUTPUT0" -o "$OUTPUT1" -p "$print_columns" -t "$target_columns" -c "$compare_columns" 
 echo "Part 1: Complete"
 grep -v -e BOTH $OUTPUT1 > $FILT1
 echo ""
 
 # Part 2: Run the Second script
 echo "Running Part 2: Clustering SNPs into ancestry regions"
-python "${script_path}PePa_BC_ClusteringSNPs.py" "$FILT1" "$output_file_base"  -CLUSTER "$CSIZE"
+python "${script_path}/PePa_BC_ClusteringSNPs.py" "$FILT1" "$output_file_base"  -CLUSTER "$CSIZE"
 echo "Part 2: Complete"
 echo ""
 
@@ -210,7 +210,7 @@ OUTPUT3=$(mktemp)
 SUFFIX="_CLUST_"
 FILT3="${output_file_base}_ClusteredRaw.csv"
 echo "Running Part 3: Combining clustering files from Individuals to a single file"
-python "${script_path}PePa_BC_ClustCombine.py" -S "$SUFFIX" -o "$OUTPUT3"
+python "${script_path}/PePa_BC_ClustCombine.py" -S "$SUFFIX" -o "$OUTPUT3"
 
 sed 's/_CLUST_Individual//g' $OUTPUT3 | sed 's/.csv//g' > $FILT3
 
@@ -219,7 +219,7 @@ SEL=$((CSIZE * 10))
 
 echo "Refining clusters.."
 echo "To generate ancestry blocks, clusters of the following size will be ignored:" "$SEL"
-python "${script_path}PePa_BC_ClusterClusters.py" -I "$FILT3" -O "$REFINE"  -N "$SEL"
+python "${script_path}/PePa_BC_ClusterClusters.py" -I "$FILT3" -O "$REFINE"  -N "$SEL"
 
 echo "Part 3: Complete"
 echo ""

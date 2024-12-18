@@ -40,7 +40,8 @@ total_counts <- aggregate(
   data = aggregated_data,
   sum
 )
-
+# CHECK FROM HERE
+# NAMES HAS TOO MANY STUFF - RUN IN R TO TEST
 # Step 5: Merge the total counts back to the aggregated data
 merged_data <- merge(aggregated_data, total_counts, by = c("filename", "Chromosome"), suffixes = c("_Ancestry", "_Total"))
 

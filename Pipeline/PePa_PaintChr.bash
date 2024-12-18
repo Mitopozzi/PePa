@@ -138,7 +138,7 @@ fi
 if [[ -n $GTF ]]; then
     echo "GTF files provided, converting into annotation file..."
 	ANNO="${output_file_base}.anno"
-    python "${script_path}PePa_PC_ExtracGTF.py" -I "$GTF" -O "$ANNO"
+    python "${script_path}/PePa_PC_ExtracGTF.py" -I "$GTF" -O "$ANNO"
 fi
 
 # Determinate the number of files
@@ -172,7 +172,7 @@ if [ -n "$input_file" ]; then
 	# Part 0: Prepare the data from genome painting
 	echo "Running Part 0: Generating a tabulate version of VCF files provided..."
 	# Call a Python script for processing using TARGET1 and TARGET2
-	python "${script_path}PePa_BC_VCFtoTable.py" -L "$input_file" -P1 "$TARGET1" -P2 "$TARGET2" -O "$OUTPUT000"
+	python "${script_path}/PePa_BC_VCFtoTable.py" -L "$input_file" -P1 "$TARGET1" -P2 "$TARGET2" -O "$OUTPUT000"
 	echo "Part 0: Complete"
 	echo ""
 
@@ -210,14 +210,14 @@ OUTPUT1=$(mktemp)
 FILT1="${output_file_base}_Transformed.csv"
 
 echo "Running Part 1: Transforming Tabulated VCF file into Comparison File"
-python "${script_path}PePa_BC_ComparisonTable.py" -i "$OUTPUT0" -o "$OUTPUT1" -p "$print_columns" -t "$target_columns" -c "$compare_columns" 
+python "${script_path}/PePa_BC_ComparisonTable.py" -i "$OUTPUT0" -o "$OUTPUT1" -p "$print_columns" -t "$target_columns" -c "$compare_columns" 
 echo "Part 1: Complete"
 grep -v -e BOTH $OUTPUT1 > $FILT1
 echo ""
 
 # Part 2: Run the Second script
 echo "Running Part 2: Clustering SNPs into ancestry regions"
-python "${script_path}PePa_BC_ClusteringSNPs.py" "$FILT1" "$output_file_base"  -CLUSTER "$CSIZE"
+python "${script_path}/PePa_BC_ClusteringSNPs.py" "$FILT1" "$output_file_base"  -CLUSTER "$CSIZE"
 echo "Part 2: Complete"
 echo ""
 
@@ -226,7 +226,7 @@ OUTPUT3=$(mktemp)
 SUFFIX="_CLUST_"
 FILT3="${output_file_base}_ClusteredRaw.csv"
 echo "Running Part 3: Combining clustering files from Individuals to a single file"
-python "${script_path}PePa_BC_ClustCombine.py" -S "$SUFFIX" -o "$OUTPUT3"
+python "${script_path}/PePa_BC_ClustCombine.py" -S "$SUFFIX" -o "$OUTPUT3"
 
 sed 's/_CLUST_Individual//g' $OUTPUT3 | sed 's/.csv//g' > $FILT3
 
@@ -235,7 +235,7 @@ SEL=$((CSIZE * 10))
 
 echo "Refining clusters.."
 echo "To generate ancestry blocks, clusters of the following size will be ignored:" "$SEL"
-python "${script_path}PePa_BC_ClusterClusters.py" -I "$FILT3" -O "$REFINE"  -N "$SEL"
+python "${script_path}/PePa_BC_ClusterClusters.py" -I "$FILT3" -O "$REFINE"  -N "$SEL"
 
 echo "Part 3: Complete"
 echo ""
@@ -247,7 +247,7 @@ zip -m -q $ZIPPED *_CLUST_*.csv
 
 # Part 4: Run the Fourth script
 echo "Running Part 4: Painting chromosome depending on Ancestry"
-Rscript  "${script_path}PePa_PC_GenomePaint.r" "$REFINE" "$output_file_base"
+Rscript  "${script_path}/PePa_PC_GenomePaint.r" "$REFINE" "$output_file_base"
 echo "Part 4: Complete"
 echo ""
 
@@ -255,7 +255,7 @@ echo ""
 if [ -n "$GRAPH" ]; then
 	# Optional code 1: Run  optional script for ancestry computation: % of Genome
 	echo "Running Optional code: Plotting percentage of ancestry of each genome..."
-	Rscript  "${script_path}PePa_PC_ntPerc.r" "$FILT3" "$output_file_base" "$CSIZE"
+	Rscript  "${script_path}/PePa_PC_ntPerc.r" "$FILT3" "$output_file_base" "$CSIZE"
 	echo "Optional code 1: Complete"
 
 fi
@@ -264,9 +264,9 @@ if [ -n "$ANNO" ]; then
 	# Optional code 2: Run  optional script for ancestry computation: % of Genes
 	GENETAB="${output_file_base}_GeneAnc.csv"
 	echo "Running Optional code: Plotting ancestry of each gene..."
-	python "${script_path}PePa_PC_GeneToClustRep.py" -g "$ANNO" -a "$FILT3" -o "$GENETAB" 
+	python "${script_path}/PePa_PC_GeneToClustRep.py" -g "$ANNO" -a "$FILT3" -o "$GENETAB" 
 	echo "Ancestry of each computed in: " "$GENETAB"
-	Rscript  "${script_path}PePa_PC_GeneCountPerc.r" "$GENETAB" "$output_file_base" 
+	Rscript  "${script_path}/PePa_PC_GeneCountPerc.r" "$GENETAB" "$output_file_base" 
 	echo "Optional code 2: Complete"
 	
 fi

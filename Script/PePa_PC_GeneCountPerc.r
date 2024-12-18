@@ -9,7 +9,7 @@ check_and_install_packages <- function(packages) {
 }
 
 # List of required packages
-required_packages <- c("dplyr", "tidyr", "ggplot2")
+required_packages <- c("dplyr", "ggplot2")
 
 # Check and install packages quietly
 check_and_install_packages(required_packages)
