@@ -6,8 +6,7 @@ The example files can be run using the following commands:
 ```bash
 pepa-paint -i List.txt -o Pombe -1 EBC091.vcf.gz -2 EBC411.vcf.gz -c 100 -A Annotation.anno -C 1
 ```
-or 
-
+## *2. To generate only tables:*
 ```bash
 pepa-base -i List.txt -o Pombe -1 EBC091.vcf.gz -2 EBC411.vcf.gz -c 100
 ```
