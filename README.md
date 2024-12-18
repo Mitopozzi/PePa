@@ -52,6 +52,7 @@ Multiple commands are available in PePa, but the main pipeline can be used with 
 ```bash
 pepa-paint -i ListVCF.txt -o Results -1 Parent1.vcf -2 Parent2.vcf -c 1000 -G NCBIannotation.gtf -C 1
 ```
+![Painted chromosomes in Schizosaccharomyces pombe](https://github.com/Mitopozzi/PePa/raw/main/Test/Pombe_PePa_Paint.png)
 
 ### **Required Flags**
 | Flag | Description |
