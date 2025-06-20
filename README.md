@@ -1,6 +1,6 @@
-# **Pedigree Painter (PePa)**
+# **Pedigree Painter (pepa)**
 
-PePa is a visualization tool for genomics data that can be used to visualize which and how much of the parental genome has been inherited by the offspring. 
+pepa is a visualization tool for genomics data that can be used to visualize which and how much of the parental genome has been inherited by the offspring. 
 The pipeline generates data optimized for ggplot2, so users can create their own plots using this data. 
 The R scripts in the pipeline focus on graphics, and are optimized for tens of offspring but have been tested on up to 250 samples with 30 chromosomes each. 
 
@@ -18,7 +18,7 @@ The script performs the following tasks:
 
 ---
 
-## **Installing `PePa` via Conda**
+## **Installing `pepa` via Conda**
 
 The pipelines are written in Bash, making it easy to modify and run locally, however, it is recommended to use the program through CONDA.
 The installation through CONDA checks for all the prerequisites has been tested for both clustering and visualization. The usage is described as running within a CONDA environment.
@@ -36,8 +36,8 @@ The output of all analyses is made suitable for ggplot2, and all plots are done 
    conda activate pepa_env
    ```
 
-2. **Install `PePa`**:
-   Run the following command to install `PePa`:
+2. **Install `pepa`**:
+   Run the following command to install `pepa`:
    ```bash
    conda install mitopozzi::pepa
    ```
@@ -51,12 +51,12 @@ The output of all analyses is made suitable for ggplot2, and all plots are done 
 
 ## **Usage**
 
-Multiple commands are available in PePa, but the main pipeline can be used with the command below.
+Multiple commands are available in pepa, but the main pipeline can be used with the command below.
 
 ```bash
 pepa-paint -i ListVCF.txt -o Results -1 Parent1.vcf -2 Parent2.vcf -c 1000 -G NCBIannotation.gtf -C 1
 ```
-![Painted chromosomes in Schizosaccharomyces pombe](https://github.com/Mitopozzi/PePa/raw/main/Test/Example_Output/Pombe_PePa_Paint.png)
+![Painted chromosomes in Schizosaccharomyces pombe](https://github.com/Mitopozzi/pepa/raw/main/Test/Example_Output/Pombe_pepa_Paint.png)
 
 ### **Required Flags**
 | Flag | Description |
