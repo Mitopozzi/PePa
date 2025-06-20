@@ -5,6 +5,7 @@ The pipeline generates data optimized for ggplot2, so users can create their own
 The R scripts in the pipeline focus on graphics, and are optimized for tens of offspring but have been tested on up to 250 samples with 30 chromosomes each. 
 
 More information can be found in the article https://www.biorxiv.org/content/10.1101/2024.12.18.629215v1 
+
 Examples of the inputs and outputs are  in the `Test` folder.
 
 ---
