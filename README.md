@@ -108,7 +108,7 @@ The folder contains:
 
 - `Example_Input/`: Sample VCFs, annotation, and list file used as input.
 - `Example_Output/`: Expected output files, including:
-  - Clustered results (`*_Clustered.csv`): these show the ancestry blocks detected with a given SNP clustering size. You can try different `-c` values to tune resolution. An five examples can be found in figure `Fig_Clustered` with `-c` values of 2; 10; 100; 1000; 5000.
+  - Clustered results (`*_Clustered.csv`): these show the ancestry blocks detected with a given SNP clustering size. You can try different `-c` values to tune resolution. An five examples can be found in figure `Fig_Clustered` with `-c` values of 2; 10; 100; 1000; 2000; 5000.
   - Summary tables and transformed CSVs.
   - Genome painting plots (`.png`) and barplots (`.pdf`).
 - Folders like `Example10/`, `Example50/`, and `Example100/` show how pepa paint chromosomes across different numbers of individuals.
