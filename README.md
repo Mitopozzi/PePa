@@ -6,6 +6,7 @@ The R scripts in the pipeline focus on graphics, and are optimized for tens of o
 
 More information can be found in the article https://www.biorxiv.org/content/10.1101/2024.12.18.629215v1 
 
+Examples of the inputs and outputs are  in the `Test` folder.
 ---
 
 ## **Description**
@@ -54,7 +55,7 @@ Multiple commands are available in PePa, but the main pipeline can be used with 
 ```bash
 pepa-paint -i ListVCF.txt -o Results -1 Parent1.vcf -2 Parent2.vcf -c 1000 -G NCBIannotation.gtf -C 1
 ```
-![Painted chromosomes in Schizosaccharomyces pombe](https://github.com/Mitopozzi/PePa/raw/main/Test/Pombe_PePa_Paint.png)
+![Painted chromosomes in Schizosaccharomyces pombe](https://github.com/Mitopozzi/PePa/raw/main/Test/Example_Output/Pombe_PePa_Paint.png)
 
 ### **Required Flags**
 | Flag | Description |
@@ -98,5 +99,19 @@ The output of this file can be used for  `pepa-paint` by running the command  `*
 ```bash
 pepa-split -I MultiSampleVCFfile.vcf.gz -b 20
 ```
+---
+
+## 📁 `Test` Folder
+
+This folder contains:
+
+- `Example_Input/`: Sample VCFs, annotation, and list file used as input.
+- `Example_Output/`: Expected output files, including:
+  - Clustered results (`*_Clustered.csv`): these show the ancestry blocks detected with a given SNP clustering size. You can try different `-c` values to tune resolution. An five examples can be found in figure `Fig_Clustered` with `-c` values of 2; 10; 100; 1000; 5000.
+  - Summary tables and transformed CSVs.
+  - Genome painting plots (`.png`) and barplots (`.pdf`).
+- Folders like `Example10/`, `Example50/`, and `Example100/` show how pepa paint chromosomes across different numbers of individuals.
+
+You can use these examples to explore understand pepa’s output format and parameter effects.
 
 ---
